@@ -10,7 +10,13 @@ const app=express();
 
 DbConnection();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:["http://localhost:3000"],
+    methods:["GET","POST","DELETE","PUT"],
+    credentials:true,
+    optionsSuccessStatus:204
+}));
+
 app.use(cookieParser());
 app.use('/api/auth',AuthRoutes)
 app.use('/api/admin',AdminRoutes)
