@@ -12,6 +12,10 @@ const getUser=async(req,res)=>{
 const deleteUser=async(req,res)=>{
     try{
         const userId=req.params.id;
+        const checkAdmin=await UserModel.findById(userId);
+        if(checkAdmin.role==='admin'){
+            return res.status(200).json({message:"Admin cannot be deleted"});
+        }
         const user=await UserModel.findByIdAndDelete(userId);
         if(!user){
             res.status(404).json({message:"user not found"});
