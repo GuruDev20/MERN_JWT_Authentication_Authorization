@@ -29,7 +29,13 @@ const login=async(req,res)=>{
         if(!validPassword){
             return res.status(404).json({success:false,message:"Invalid credentials"});
         }
-        res.status(200).json({success:true,message:"login successfully",user})
+        const token=jwt.sign({userId:user._id},process.env.SECRET)
+        res.cookie('token',token,{
+            httpOnly:true,
+            secure:false,
+            maxAge:360000
+        })
+        res.status(200).json({success:true,message:"login successfully",user,token})
     }
     catch(error){
         res.status(500).json({success:false,message:"Internal server error"});
