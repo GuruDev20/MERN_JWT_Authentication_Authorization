@@ -1,14 +1,23 @@
 import React, { useState } from 'react'
 import '../styles/Login.css'
 import { Link } from 'react-router-dom'
+import { post } from '../services/API';
 export default function Login() {
 
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault();
         console.log(email,password);
+        try{
+            const request=await post('/api/auth/login',{email,password})
+            const response=request.data;
+            console.log(response)
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
     return (
