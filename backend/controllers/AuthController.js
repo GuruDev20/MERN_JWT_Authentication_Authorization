@@ -35,7 +35,7 @@ const login=async(req,res)=>{
             secure:false,
             maxAge:360000
         })
-        res.status(200).json({success:true,message:"login successfully",user,token})
+        res.status(200).json({success:true,message:"Login successfully",user,token})
     }
     catch(error){
         res.status(500).json({success:false,message:"Internal server error"});

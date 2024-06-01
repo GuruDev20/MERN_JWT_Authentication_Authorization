@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import '../styles/Register.css'
 import { Link } from 'react-router-dom'
 import { post } from '../services/API';
+import {toast} from 'react-hot-toast'
 export default function Register() {
 
     const [name,setName]=useState('')
@@ -14,6 +15,9 @@ export default function Register() {
         try{
             const request=await post('/api/auth/register',{name,email,password})
             const response=request.data;
+            if(request.status===200){
+                toast.success(response.message);
+            }
             console.log(response)
         }
         catch(error){

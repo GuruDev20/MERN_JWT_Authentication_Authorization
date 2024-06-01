@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../styles/Login.css'
 import { Link } from 'react-router-dom'
 import { post } from '../services/API';
+import {toast} from 'react-hot-toast'
 export default function Login() {
 
     const [email,setEmail]=useState('');
@@ -13,6 +14,9 @@ export default function Login() {
         try{
             const request=await post('/api/auth/login',{email,password})
             const response=request.data;
+            if(request.status===200){
+                toast.success(response.message);
+            }
             console.log(response)
         }
         catch(error){

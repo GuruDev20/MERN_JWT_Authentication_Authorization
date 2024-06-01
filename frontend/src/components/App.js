@@ -7,11 +7,13 @@ import Register from '../pages/Register'
 import Admin from '../pages/Admin'
 export default function App() {
     return (
-        <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
-            <Route path='/admin' element={<Admin/>}/>
-        </Routes>
+        <>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
+                <Route path='/admin' element={<Admin/>}/>
+            </Routes>
+        </>
     )
 }
