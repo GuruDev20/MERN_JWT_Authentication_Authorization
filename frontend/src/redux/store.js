@@ -6,7 +6,6 @@ import {persistReducer,persistStore} from 'redux-persist'
 const persistConfig={
     key:"root",
     storage,
-    // whitelist:['Auth']
 }
 
 const reducer=persistReducer(persistConfig,AuthSlice)

@@ -11,7 +11,7 @@ const register=async(req,res)=>{
         const hashPassword=await bcrypt.hashSync(password,10)
         const newUser=new UserModel({name,email,password:hashPassword});
         await newUser.save();
-        res.status(200).json({newUser});
+        res.status(200).json({success:true,message:"Registered User Successfully",newUser});
     }
     catch(error){
         res.status(500).json({success:false,message:"Internal server error"});

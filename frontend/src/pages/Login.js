@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import '../styles/Login.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { post } from '../services/API';
 import {toast} from 'react-hot-toast'
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/AuthSlice';
 export default function Login() {
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     
@@ -17,6 +18,12 @@ export default function Login() {
             const request=await post('/api/auth/login',{email,password})
             const response=request.data;
             if(request.status===200){
+                if(response.user.role==='admin'){
+                    navigate('/admin')
+                }
+                else if(response.user.role==='user'){
+                    navigate('/')
+                }
                 toast.success(response.message);
                 dispatch(setUser(response.user))
             }
