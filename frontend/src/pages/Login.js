@@ -3,8 +3,10 @@ import '../styles/Login.css'
 import { Link } from 'react-router-dom'
 import { post } from '../services/API';
 import {toast} from 'react-hot-toast'
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/AuthSlice';
 export default function Login() {
-
+    const dispatch=useDispatch();
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     
@@ -16,6 +18,7 @@ export default function Login() {
             const response=request.data;
             if(request.status===200){
                 toast.success(response.message);
+                dispatch(setUser(response.user))
             }
             console.log(response)
         }
