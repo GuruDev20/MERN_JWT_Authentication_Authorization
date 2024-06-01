@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
 import '../styles/Register.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { post } from '../services/API';
 import {toast} from 'react-hot-toast'
 export default function Register() {
-
+    const navigate=useNavigate();
     const [name,setName]=useState('')
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
@@ -17,6 +17,7 @@ export default function Register() {
             const response=request.data;
             if(request.status===200){
                 toast.success(response.message);
+                navigate('/login')
             }
             console.log(response)
         }
