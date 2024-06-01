@@ -52,4 +52,17 @@ const logout=async(req,res)=>{
     }
 }
 
-module.exports={register,login,logout};
+const checkUser=async(req,res)=>{
+    try{
+        const user=req.user;
+        if(!user){
+            res.status(404).json({message:"User not found"});
+        }
+        res.status(200).json(user);
+    }
+    catch(error){
+        res.status(500).json({success:false,message:"Internal server error"});
+    }
+}
+
+module.exports={register,login,logout,checkUser};

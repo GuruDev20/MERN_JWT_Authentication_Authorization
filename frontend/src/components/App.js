@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/App.css'
 import {Routes,Route} from 'react-router-dom'
 import Home from '../pages/Home'
@@ -8,7 +8,14 @@ import Admin from '../pages/Admin'
 import AdminLayouts from '../layouts/AdminLayouts'
 import UserLayout from '../layouts/UserLayout'
 import PublicLayout from '../layouts/PublicLayout'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser } from '../redux/AuthSlice'
 export default function App() {
+    const dispatch=useDispatch();
+    const user=useSelector((state)=>state.Auth.user)
+    useEffect(()=>{
+        dispatch(updateUser())
+    },[dispatch, user])
     return (
         <>
             <Routes>
